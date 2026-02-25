@@ -28,21 +28,6 @@
       line-height: 1.7;
     }
 
-    /* ── TOPBAR ── */
-    .topbar {
-      background: var(--white);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 18px 24px;
-      border-bottom: 1px solid #e8e3da;
-    }
-
-    .topbar img {
-      height: 64px;
-      width: auto;
-    }
-
     /* ── HERO ── */
     .hero {
       background: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
@@ -58,6 +43,12 @@
       inset: 0;
       background: linear-gradient(to bottom, rgba(10,28,20,0.42) 0%, rgba(10,28,20,0.55) 100%);
       pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
     }
 
     .hero-badge {
@@ -519,37 +510,34 @@
 </head>
 <body>
 
-  <!-- ── TOPBAR ── -->
-  <header class="topbar">
-    <img src="logo.png" alt="Nissen & Kro logo" />
-  </header>
-
   <!-- ── HERO ── -->
   <section class="hero">
-    <span class="hero-badge">Krop &amp; Sind · Nissen &amp; Kro</span>
-    <h1>Fra rod<br>til <em>ro</em></h1>
-    <p class="hero-subtitle">En sanselig weekend i naturens tegn</p>
+    <div class="hero-content">
+      <span class="hero-badge">Krop &amp; Sind · Nissen &amp; Kro</span>
+      <h1>Fra rod<br>til <em>ro</em></h1>
+      <p class="hero-subtitle">En sanselig weekend i naturens tegn</p>
 
-    <div class="hero-meta">
-      <div class="hero-meta-item">
-        <span class="label">Dato</span>
-        <span class="value">29–31. maj 2026</span>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <span class="label">Dato</span>
+          <span class="value">29–31. maj 2026</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Sted</span>
+          <span class="value">Roevej 5, 8643 Ans</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Pris</span>
+          <span class="value">3.000 kr.</span>
+        </div>
+        <div class="hero-meta-item">
+          <span class="label">Pladser</span>
+          <span class="value">Max 10 deltagere</span>
+        </div>
       </div>
-      <div class="hero-meta-item">
-        <span class="label">Sted</span>
-        <span class="value">Roevej 5, 8643 Ans</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Pris</span>
-        <span class="value">3.000 kr.</span>
-      </div>
-      <div class="hero-meta-item">
-        <span class="label">Pladser</span>
-        <span class="value">Max 10 deltagere</span>
-      </div>
+
+      <a href="#program" class="hero-cta">Se program &amp; tilmeld dig</a>
     </div>
-
-    <a href="#program" class="hero-cta">Se program &amp; tilmeld dig</a>
   </section>
 
   <div class="divider"></div>
@@ -755,7 +743,6 @@
 
   <!-- ── SCRIPTS ── -->
   <script>
-    // Tab switcher
     document.querySelectorAll('.day-tab').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
@@ -765,7 +752,6 @@
       });
     });
 
-    // Accordion
     document.querySelectorAll('.accordion-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const isOpen = btn.classList.contains('open');
