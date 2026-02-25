@@ -1,12 +1,784 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="da">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Min side</title>
-  </head>
-  <body>
-    <h1>Hej Netlify 👋</h1>
-    <p>Dette er min første side deployet fra GitHub.</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fra rod til ro – Krop & Sind weekend</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #4e8080;
+      --teal-dark: #3a6464;
+      --teal-light: #6a9e9e;
+      --cream: #faf8f3;
+      --white: #ffffff;
+      --dark: #2c2c2c;
+      --mid: #555;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--dark);
+      background: var(--cream);
+      line-height: 1.7;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px 24px;
+      border-bottom: 1px solid #e8e3da;
+    }
+
+    .topbar img {
+      height: 64px;
+      width: auto;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1400&auto=format&fit=crop&q=80') center/cover no-repeat;
+      padding: 100px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,28,20,0.42) 0%, rgba(10,28,20,0.55) 100%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.22);
+      border: 1.5px solid rgba(255,255,255,0.6);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 8px 22px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 5.2rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      color: #c8eadc;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.95);
+      letter-spacing: 0.06em;
+      margin-bottom: 40px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.45);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+
+    .hero-meta-item {
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 12px;
+      padding: 14px 24px;
+      text-align: center;
+      min-width: 160px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-meta-item .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a8d5c2;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .hero-meta-item .value {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 16px 40px;
+      border-radius: 50px;
+      transition: background 0.25s, transform 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-cta:hover {
+      background: var(--teal-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 6px;
+      background: linear-gradient(90deg, var(--teal-light), var(--teal), var(--teal-dark));
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 72px 24px; }
+
+    .container { max-width: 860px; margin: 0 auto; }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 400;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+
+    .section-lead {
+      color: var(--mid);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+      padding-bottom: 28px;
+      border-bottom: 1.5px solid #ddd8cf;
+    }
+
+    /* ── INTRO ── */
+    .intro { background: var(--white); padding: 64px 24px; }
+
+    .intro-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .intro-p {
+      font-size: 1.05rem;
+      color: var(--mid);
+      line-height: 1.85;
+      margin-bottom: 20px;
+    }
+
+    .intro-p:first-child {
+      font-size: 1.12rem;
+      color: var(--dark);
+    }
+
+    .intro-closing {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--teal);
+      margin-bottom: 0;
+    }
+
+    /* ── ABOUT ── */
+    .about { background: var(--teal); color: var(--white); }
+
+    .about .section-title { color: var(--white); }
+    .about .section-lead { color: rgba(255,255,255,0.75); border-color: rgba(255,255,255,0.2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .about-card:hover {
+      background: rgba(255,255,255,0.18);
+      transform: translateY(-3px);
+    }
+
+    .about-card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .about-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+      color: var(--white);
+    }
+
+    .about-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+
+    /* ── PROGRAM ── */
+    .program { background: var(--white); }
+
+    .day-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .day-tab {
+      background: none;
+      border: 2px solid var(--teal);
+      color: var(--teal);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      padding: 10px 22px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.03em;
+    }
+
+    .day-tab.active,
+    .day-tab:hover {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .day-panel { display: none; }
+    .day-panel.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+    .program-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .program-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      background: var(--cream);
+      border-radius: 10px;
+      border-left: 3px solid var(--teal-light);
+      font-size: 0.95rem;
+    }
+
+    .program-list li .time {
+      font-weight: 600;
+      color: var(--teal);
+      white-space: nowrap;
+      min-width: 70px;
+      font-size: 0.85rem;
+      padding-top: 2px;
+    }
+
+    .program-list li .activity { color: var(--dark); }
+
+    /* ── PRACTICAL ── */
+    .practical { background: var(--cream); }
+
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 44px;
+    }
+
+    .included-item {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 22px 20px;
+      border: 1.5px solid #e3ddd5;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .included-item .check {
+      width: 28px;
+      height: 28px;
+      background: var(--teal);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      font-size: 0.8rem;
+      margin-top: 1px;
+    }
+
+    .included-item p { font-size: 0.9rem; color: var(--mid); line-height: 1.55; }
+
+    .contact-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 32px 28px;
+      border: 2px solid var(--teal-light);
+      text-align: center;
+    }
+
+    .contact-box h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p { color: var(--mid); margin-bottom: 20px; font-size: 0.92rem; }
+
+    .contact-links { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--teal);
+      padding: 10px 20px;
+      border: 2px solid var(--teal);
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    /* ── FAQ ACCORDION ── */
+    .faq { background: var(--white); }
+
+    .accordion-item {
+      border-bottom: 1.5px solid #e3ddd5;
+    }
+
+    .accordion-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      padding: 20px 0;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.97rem;
+      font-weight: 500;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      transition: color 0.2s;
+    }
+
+    .accordion-btn:hover { color: var(--teal); }
+
+    .accordion-btn .chevron {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.25s, background 0.2s;
+      font-size: 0.7rem;
+      color: var(--teal);
+    }
+
+    .accordion-btn.open .chevron { transform: rotate(180deg); background: var(--teal); color: white; }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .accordion-body.open { max-height: 300px; }
+
+    .accordion-body p {
+      padding-bottom: 20px;
+      color: var(--mid);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* ── CTA FOOTER ── */
+    .cta-footer {
+      background: var(--teal-dark);
+      padding: 80px 24px;
+      text-align: center;
+      color: var(--white);
+    }
+
+    .cta-footer h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .cta-footer p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--white);
+      color: var(--teal-dark);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 18px 48px;
+      border-radius: 50px;
+      transition: all 0.25s;
+      letter-spacing: 0.02em;
+    }
+
+    .cta-btn:hover {
+      background: var(--cream);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+    }
+
+    .cta-note {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 24px;
+      font-size: 0.8rem;
+    }
+
+    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero-meta-item { min-width: 140px; }
+      .day-tabs { gap: 6px; }
+      .contact-links { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── TOPBAR ── -->
+  <header class="topbar">
+    <img src="logo.png" alt="Nissen & Kro logo" />
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <span class="hero-badge">Krop &amp; Sind · Nissen &amp; Kro</span>
+    <h1>Fra rod<br>til <em>ro</em></h1>
+    <p class="hero-subtitle">En sanselig weekend i naturens tegn</p>
+
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="label">Dato</span>
+        <span class="value">29–31. maj 2026</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Sted</span>
+        <span class="value">Roevej 5, 8643 Ans</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Pris</span>
+        <span class="value">3.000 kr.</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="label">Pladser</span>
+        <span class="value">Max 10 deltagere</span>
+      </div>
+    </div>
+
+    <a href="#program" class="hero-cta">Se program &amp; tilmeld dig</a>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── INTRO TEXT ── -->
+  <section class="intro">
+    <div class="container">
+      <div class="intro-inner">
+        <p class="intro-p">Træd ind i et rum, hvor vi forbinder krop og sind gennem bevægelse, bevidsthed og naturens egne råvarer. Denne weekend inviterer vi dig til at sænke tempoet, mærke kroppen og genopleve glæden ved det enkle og nærende.</p>
+        <p class="intro-p">Vi dykker ned i antiinflammatorisk kost og antiinflammatoriske principper – hvad skaber ubalance i kroppen, og hvordan kan vi med bevidste valg støtte vores energi?</p>
+        <p class="intro-p">Vi skal ud og sanke i naturen med særligt fokus på, hvad mælkebøtten kan tilbyde os.</p>
+        <p class="intro-p">Weekenden bindes sammen af blid og nærværende yoga, der støtter kroppens udrensning, skaber ro i nervesystemet og giver plads til fordybelse.</p>
+        <p class="intro-p intro-closing">En weekend med ro, fællesskab og fornyet energi.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ── -->
+  <section class="about">
+    <div class="container">
+      <h2 class="section-title">Hvad er weekenden?</h2>
+      <p class="section-lead">
+        I samarbejde med Karin Madsen inviterer Nissen &amp; Kro dig ind i et rum, hvor krop og sind mødes — gennem bevægelse, bevidsthed og naturens egne råvarer.
+      </p>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <span class="icon">🌿</span>
+          <h3>Antiinflammatorisk kost</h3>
+          <p>Vi dykker ned i, hvad der skaber ubalance i kroppen, og hvordan bevidste valg kan støtte vores energi og velvære.</p>
+        </div>
+        <div class="about-card">
+          <span class="icon">🌼</span>
+          <h3>Sanke i naturen</h3>
+          <p>Vi går ud og sanker med særligt fokus på, hvad mælkebøtten kan tilbyde os — og laver vores egen mælkebøttecreme.</p>
+        </div>
+        <div class="about-card">
+          <span class="icon">🧘</span>
+          <h3>Blid &amp; nærværende yoga</h3>
+          <p>Yoga binder weekenden sammen og støtter kroppens udrensning, skaber ro i nervesystemet og giver plads til fordybelse.</p>
+        </div>
+        <div class="about-card">
+          <span class="icon">🔥</span>
+          <h3>Ro, fællesskab &amp; energi</h3>
+          <p>Sænk tempoet, mærk kroppen og genoplev glæden ved det enkle og nærende — i selskab med andre søgende sjæle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROGRAM ── -->
+  <section class="program" id="program">
+    <div class="container">
+      <h2 class="section-title">Program</h2>
+      <p class="section-lead">Tre dage fyldt med nærvær, natur og fornyet energi.</p>
+
+      <div class="day-tabs">
+        <button class="day-tab active" data-day="fredag">Fredag 29/5</button>
+        <button class="day-tab" data-day="lordag">Lørdag 30/5</button>
+        <button class="day-tab" data-day="sondag">Søndag 31/5</button>
+      </div>
+
+      <div id="fredag" class="day-panel active">
+        <ul class="program-list">
+          <li><span class="time">17.00–17.30</span><span class="activity">Ankomst</span></li>
+          <li><span class="time">–</span><span class="activity">Indkvartering og præsentation af stedet</span></li>
+          <li><span class="time">–</span><span class="activity">Aftensmad</span></li>
+          <li><span class="time">–</span><span class="activity">Mulighed for at tilkøbe Nada og Hovedbundsmassage</span></li>
+          <li><span class="time">–</span><span class="activity">Adgang til vildmarksbad</span></li>
+          <li><span class="time">–</span><span class="activity">Bålhygge</span></li>
+        </ul>
+      </div>
+
+      <div id="lordag" class="day-panel">
+        <ul class="program-list">
+          <li><span class="time">08.00</span><span class="activity">Morgenmad</span></li>
+          <li><span class="time">–</span><span class="activity">Sanketur i naturen</span></li>
+          <li><span class="time">–</span><span class="activity">Tilberedning af vores fundne urter — snak om antiinflammatorisk kost</span></li>
+          <li><span class="time">–</span><span class="activity">Lave mælkebøttecreme</span></li>
+          <li><span class="time">–</span><span class="activity">Frokost</span></li>
+          <li><span class="time">14.00–15.30</span><span class="activity">Yin-Yoga</span></li>
+          <li><span class="time">–</span><span class="activity">Mulighed for at tilkøbe Nada og Hovedbundsmassage</span></li>
+          <li><span class="time">–</span><span class="activity">Aftensmad</span></li>
+          <li><span class="time">–</span><span class="activity">Vildmarksbad &amp; bålhygge</span></li>
+          <li><span class="time">–</span><span class="activity">Godnat yoga</span></li>
+        </ul>
+      </div>
+
+      <div id="sondag" class="day-panel">
+        <ul class="program-list">
+          <li><span class="time">08.00</span><span class="activity">En lille morgensnack</span></li>
+          <li><span class="time">08.30–10.00</span><span class="activity">Yoga</span></li>
+          <li><span class="time">10.30</span><span class="activity">Brunch</span></li>
+          <li><span class="time">–</span><span class="activity">Tak for denne gang 🌿</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRACTICAL ── -->
+  <section class="practical" id="praktisk">
+    <div class="container">
+      <h2 class="section-title">Praktisk information</h2>
+      <p class="section-lead">Alt hvad du behøver at vide før du pakker tasken.</p>
+
+      <div class="included-grid">
+        <div class="included-item">
+          <div class="check">✓</div>
+          <p><strong>2 x overnatning</strong> i shelter, glampingtelte eller barværelse. Ikke enkeltværelse — du er velkommen til at medbringe eget telt.</p>
+        </div>
+        <div class="included-item">
+          <div class="check">✓</div>
+          <p><strong>Fuld forplejning</strong> alle dage er inkluderet i prisen.</p>
+        </div>
+        <div class="included-item">
+          <div class="check">✓</div>
+          <p><strong>Depositum 500 kr.</strong> vil blive opkrævet ved tilmelding. Restbeløbet betales inden weekenden.</p>
+        </div>
+        <div class="included-item">
+          <div class="check">✓</div>
+          <p><strong>Pris: 3.000 kr.</strong> — Max 10 deltagere. Først til mølle-princippet gælder.</p>
+        </div>
+      </div>
+
+      <div class="contact-box">
+        <h3>Spørgsmål? Kontakt os gerne.</h3>
+        <p>Skriv en mail eller ring — vi svarer hurtigst muligt.</p>
+        <div class="contact-links">
+          <a href="mailto:nissenogkro@gmail.com" class="contact-link">
+            ✉ nissenogkro@gmail.com
+          </a>
+          <a href="tel:+4560172911" class="contact-link">
+            📞 60 17 29 11
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section class="faq">
+    <div class="container">
+      <h2 class="section-title">Spørgsmål &amp; svar</h2>
+      <p class="section-lead">De mest stillede spørgsmål om weekenden.</p>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" data-target="faq1">
+          Hvad skal jeg medbringe?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body" id="faq1">
+          <p>Behageligt tøj til yoga og udendørs aktiviteter, vandtæt fodtøj til sanketur, evt. eget telt hvis du foretrækker det. Vi anbefaler at pakke efter vejret — og huske at åbne sindet for naturens ro.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" data-target="faq2">
+          Er der mulighed for enkeltværelse?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body" id="faq2">
+          <p>Der er IKKE mulighed for enkeltværelse. Overnatning sker i shelter, glampingtelte eller barværelse. Er du alene om at komme, matcher vi dig med andre deltagere — eller du kan medbringe dit eget telt.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" data-target="faq3">
+          Hvordan betaler jeg depositum?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body" id="faq3">
+          <p>Depositum på 500 kr. opkræves ved tilmelding. Du vil modtage betalingsoplysninger, når du tilmelder dig via mail eller telefon.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" data-target="faq4">
+          Skal man have erfaring med yoga?
+          <span class="chevron">▼</span>
+        </button>
+        <div class="accordion-body" id="faq4">
+          <p>Overhovedet ikke. Yogaen er blid og nærværende og tilpasset alle niveauer. Det handler om at mærke kroppen — ikke om at performe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FOOTER ── -->
+  <section class="cta-footer" id="tilmeld">
+    <h2>Klar til at finde ro?</h2>
+    <p>Der er kun 10 pladser — tilmeld dig nu og sikr din plads på denne sanselige weekend i naturens tegn.</p>
+    <a href="mailto:nissenogkro@gmail.com?subject=Tilmelding%3A%20Fra%20rod%20til%20ro%20%E2%80%93%2029-31.%20maj%202026&body=Hej%20Nissen%20%26%20Kro%2C%0A%0AJeg%20vil%20gerne%20tilmelde%20mig%20weekenden%20%E2%80%9CFra%20rod%20til%20ro%E2%80%9D%20d.%2029-31.%20maj%202026.%0A%0AMit%20navn%3A%20%0ATelefon%3A%20%0AEventuelle%20sp%C3%B8rgsm%C3%A5l%3A%20%0A%0AMed%20venlig%20hilsen" class="cta-btn">
+      Tilmeld dig her
+    </a>
+    <p class="cta-note">Max 10 deltagere · Først til mølle · Depositum 500 kr. ved tilmelding</p>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <p>Nissen &amp; Kro · Roevej 5, 8643 Ans · <a href="mailto:nissenogkro@gmail.com">nissenogkro@gmail.com</a> · <a href="tel:+4560172911">60 17 29 11</a></p>
+    <p style="margin-top:6px;">I samarbejde med Karin Madsen</p>
+  </footer>
+
+  <!-- ── SCRIPTS ── -->
+  <script>
+    // Tab switcher
+    document.querySelectorAll('.day-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(btn.dataset.day).classList.add('active');
+      });
+    });
+
+    // Accordion
+    document.querySelectorAll('.accordion-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.classList.contains('open');
+        document.querySelectorAll('.accordion-btn').forEach(b => {
+          b.classList.remove('open');
+          document.getElementById(b.dataset.target).classList.remove('open');
+        });
+        if (!isOpen) {
+          btn.classList.add('open');
+          document.getElementById(btn.dataset.target).classList.add('open');
+        }
+      });
+    });
+  </script>
+</body>
 </html>
