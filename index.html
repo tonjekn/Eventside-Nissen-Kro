@@ -782,17 +782,29 @@
     <p class="cta-note">Max 10 deltagere · Først til mølle · Depositum 500 kr. ved tilmelding </p>
   </section>
 
+    <!-- ── ABOUT NISSEN & KRO ── -->
+  <section class="about-venue" id="om-os">
+    <div class="container">
+      <h2 class="section-title">Hvem er Nissen &amp; Kro?</h2>
+      <p>
+        Vi er et landlig glamping- og shelteridyl i hjertet af Midtjylland. I løbet af året afholder vi også flere kreative og naturrige events, fx pileflet, savkurser, keramik og meget mere.
+      </p>
+
+      <p class="social-title">Læs mere om os på vores sociale medier:</p>
+      <div class="social-links">
+        <a href="https://www.facebook.com/nissenogkro" target="_blank" rel="noopener">📘 Facebook</a>
+        <a href="https://www.instagram.com/nissenogkrosglamping/" target="_blank" rel="noopener">📷 Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    © Nissen &amp; Kro · <a href="#om-os">Om os</a> · <a href="#praktisk">Praktisk</a>
+  </footer>
+
   <!-- ── SCRIPTS ── -->
   <script>
-    document.querySelectorAll('.day-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.day-tab').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(btn.dataset.day).classList.add('active');
-      });
-    });
-
     document.querySelectorAll('.accordion-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const isOpen = btn.classList.contains('open');
